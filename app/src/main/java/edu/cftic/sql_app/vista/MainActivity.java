@@ -1,12 +1,15 @@
 package edu.cftic.sql_app.vista;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.cftic.sql_app.R;
@@ -16,13 +19,18 @@ import edu.cftic.sql_app.dto.Persona;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BaseDatosCochesPersona baseDatosCochesPersona;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void cargarDatos(View view) {
 
         //creo el objeto de la base de datos
-        BaseDatosCochesPersona baseDatosCochesPersona = new BaseDatosCochesPersona(this, "MiDB", null, 1);
+        this.baseDatosCochesPersona = new BaseDatosCochesPersona(this, "MiDB", null, 1);
 
         Persona persona1 = new Persona(1, "Juan");
         Persona persona2 = new Persona(2, "Conchi");
@@ -42,13 +50,24 @@ public class MainActivity extends AppCompatActivity {
         baseDatosCochesPersona.insertarCoche(coche2);
         baseDatosCochesPersona.insertarCoche(coche3);
 
-        //consulto los coches de la persona
-        List<Coche> listacoches = baseDatosCochesPersona.buscarCochesPersona(persona2);
+            //TODO cojer el botón de mostrar y habilitarlo
+        Button boton_mostrar = findViewById(R.id.butonmostrar);
+        boton_mostrar.setEnabled(true);
 
-        Log.d(getClass().getCanonicalName(), "Los coches de " + persona2.getNombre() + " son :");
+
+    }
+
+    public void mostrarDatos(View view) {
+
+        List<Coche> listacoches = this.baseDatosCochesPersona.buscarCoches();
+
         for (Coche coche: listacoches)
         {
-            Log.d(getClass().getCanonicalName(), coche.getModelo());
+            Log.d(getClass().getCanonicalName(),
+                    coche.getId() + " " +coche.getModelo());
         }
+
     }
+
+
 }
