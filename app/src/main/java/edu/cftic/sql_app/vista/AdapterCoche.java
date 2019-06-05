@@ -31,7 +31,7 @@ public class AdapterCoche extends RecyclerView.Adapter<CocheHolder> implements V
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = inflater.inflate(R.layout.layout_coche_item, parent, false);
-        //itemView.setOnClickListener(this);//asociaría el listener
+        itemView.setOnClickListener(this);//asociaría el listener
         cocheHolder = new CocheHolder(itemView);
 
         return cocheHolder;
@@ -42,7 +42,6 @@ public class AdapterCoche extends RecyclerView.Adapter<CocheHolder> implements V
 //relleno la fila
         Coche coche = datos.get(position);
         holder.cargarCocheHolder(coche);
-        holder.itemView.setOnClickListener(this);
         holder.itemView.setTag(position);//en la fila, indico el número
     }
 
