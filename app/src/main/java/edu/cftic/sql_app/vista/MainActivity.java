@@ -1,5 +1,6 @@
 package edu.cftic.sql_app.vista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //truquillo para saber si la base de datos existe
+        File dbpath = getDatabasePath("MiDB");
+        boolean existe_bd = dbpath.exists();
+        Button boton_mostrar = findViewById(R.id.butonmostrar);
+        boton_mostrar.setEnabled(dbpath.exists());
     }
 
     public void cargarDatos(View view) {
@@ -50,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         baseDatosCochesPersona.insertarCoche(coche2);
         baseDatosCochesPersona.insertarCoche(coche3);
 
-            //TODO cojer el botón de mostrar y habilitarlo
+        //TODO cojer el botón de mostrar y habilitarlo
         Button boton_mostrar = findViewById(R.id.butonmostrar);
         boton_mostrar.setEnabled(true);
 
@@ -59,13 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void mostrarDatos(View view) {
 
-        List<Coche> listacoches = this.baseDatosCochesPersona.buscarCoches();
-
-        for (Coche coche: listacoches)
-        {
-            Log.d(getClass().getCanonicalName(),
-                    coche.getId() + " " +coche.getModelo());
-        }
+        Intent intent = new Intent(this, MuestraCochesActivity.class);
+        startActivity(intent);
 
     }
 
