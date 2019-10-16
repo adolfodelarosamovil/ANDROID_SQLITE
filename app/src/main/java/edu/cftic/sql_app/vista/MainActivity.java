@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void cargarDatos(View view) {
 
+        //SI LA BD EXISTE, NO HAGO NADA
+
+
         //creo el objeto de la base de datos
         this.baseDatosCochesPersona = new BaseDatosCochesPersona(this, "MiDB", null, 1);
 

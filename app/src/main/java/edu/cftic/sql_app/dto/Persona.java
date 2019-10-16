@@ -2,6 +2,7 @@ package edu.cftic.sql_app.dto;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 /**
  * Created by vale on 1/06/16.
@@ -11,6 +12,14 @@ public class Persona implements Parcelable {
     private int id;
     private String nombre;
 
+    @NonNull
+    @Override
+    public String toString() {
+        String objeto_str = null;
+        objeto_str = this.getNombre() + " " + "ID " + this.getId();
+
+        return objeto_str;
+    }
 
     public static final Parcelable.Creator<Persona> CREATOR = new Parcelable.Creator<Persona>(){
 
